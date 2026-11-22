@@ -1,5 +1,48 @@
 # FilmLune MCP
 
+FilmLune is an image to video AI studio and prompt gallery: upload one photo,
+get a short video from a model such as Seedance, Kling, Veo, Wan or Grok Video.
+This repository is FilmLune's open-source MCP server (MIT). It lets Claude,
+Cursor, Codex or any other Model Context Protocol client search a catalog of
+real image and video prompt cases, each labeled with the model that generated
+it, where it came from, and how it may be used. The catalog snapshot in this
+repository holds 122 reviewed cases across 9 model families, plus 30 prompt
+templates.
+
+**Try it:** [FilmLune](https://filmlune.com/) — image to video AI studio and prompt gallery<br>
+**Connect:** [Hosted MCP endpoint guide](https://filmlune.com/mcp/) — install into Claude, Cursor or Codex in a few minutes<br>
+**Browse examples:** [Video prompt cases](https://filmlune.com/prompts/video/) — see what the catalog returns before you connect
+
+## Quick start: hosted endpoint
+
+The fastest way to try FilmLune from an AI agent is the hosted endpoint
+`https://filmlune.com/api/mcp/`. Browsing the catalog needs no key.
+
+Claude (desktop or web): open **Settings → Connectors → Add custom connector**
+and paste `https://filmlune.com/api/mcp/`.
+
+Claude Code:
+
+```bash
+claude mcp add --transport http filmlune https://filmlune.com/api/mcp/
+```
+
+Codex (`~/.codex/config.toml`):
+
+```toml
+[mcp_servers.filmlune]
+url = "https://filmlune.com/api/mcp/"
+```
+
+Then ask, for example: *"Search FilmLune prompt cases for a slow push-in
+product shot and show me the best match."*
+
+Generating images or videos through the hosted endpoint needs a FilmLune
+account and an MCP access key; see the [hosted MCP guide](https://filmlune.com/mcp/).
+The rest of this README describes the local stdio package in this repository.
+
+## About this package
+
 FilmLune MCP is a read-only Model Context Protocol server for FilmLune's
 rights-filtered public case catalog and MCP-only prompt templates. This
 repository is an **M0 local candidate**: it exposes an English catalog over
@@ -89,18 +132,18 @@ deployment, or publication step.
 
 ## Connect a local MCP client
 
-Replace `/absolute/path/to/filmlune-mcp` with this repository's absolute path.
+Replace `/absolute/path/to/filmlune.com` with this repository's absolute path.
 
 Codex CLI:
 
 ```bash
-codex mcp add filmlune -- corepack pnpm --dir /absolute/path/to/filmlune-mcp start
+codex mcp add filmlune -- corepack pnpm --dir /absolute/path/to/filmlune.com start
 ```
 
 Claude Code:
 
 ```bash
-claude mcp add filmlune -- corepack pnpm --dir /absolute/path/to/filmlune-mcp start
+claude mcp add filmlune -- corepack pnpm --dir /absolute/path/to/filmlune.com start
 ```
 
 Claude Desktop-style configuration:
@@ -113,7 +156,7 @@ Claude Desktop-style configuration:
       "args": [
         "pnpm",
         "--dir",
-        "/absolute/path/to/filmlune-mcp",
+        "/absolute/path/to/filmlune.com",
         "start"
       ]
     }
